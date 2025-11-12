@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+[print("best school", end=" ") for i in range(10)]
