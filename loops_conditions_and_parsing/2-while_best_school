@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 #salam
 i = 0
-while i = 10
+while ((i < 10))
 do
-echo "Best School"
-:"$i"
-i+=1
+	echo "Best School"
+	echo "$i"
+	((i++))
+done
