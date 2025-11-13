@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#salam
+awk '{print $1, $9}'
