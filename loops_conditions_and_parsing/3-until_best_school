@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 #salam
-count = 0
-until [$count -gt 10]
+i = 1
+until [ $i -gt 10 ]
 do
 	echo "Best School"
-	echo "$i"
-	((count ++))
+	((i ++))
 done
