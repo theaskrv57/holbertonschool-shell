@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 #salam
 while IFS=: read -r username _ userid _ _ _ homedir _; do
-    echo "Username: $username | UID: $userid | Home: $homedir"
+    echo "$username | $userid | $homedir"
 done < /etc/passwd
