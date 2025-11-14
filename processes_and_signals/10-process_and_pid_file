@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# PID faylı yaradır, sonsuz döngü ilə mesaj yazır və siqnallara cavab verir
+
+PID_FILE="/var/run/myscript.pid"
+
+# Skriptin PID-ni fayla yazır
+echo $$ > "$PID_FILE"
+
+# SIGTERM və SIGQUIT siqnalları üçün handler
+term_handler() {
+    echo "I hate the kill command"
+    rm -f "$PID_FILE"
+    exit 0
+}
+
+# SIGINT siqnalı üçün handler
+int_handler() {
+    echo "Y U no love me?!"
+}
+
+# SIGQUIT və SIGTERM üçün trap
+trap term_handler SIGTERM SIGQUIT
+# SIGINT üçün trap
+trap int_handler SIGINT
+
+# Sonsuz döngü ilə mesaj yaz
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
