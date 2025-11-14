@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#salam
+pgrep -l bash
