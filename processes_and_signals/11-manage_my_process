@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Init script to manage manage_my_process
+
+PID_FILE="/var/run/my_process.pid"
+SCRIPT_PATH="/path/to/manage_my_process"  # Buraya manage_my_process skriptinin yolu
+
+start() {
+    "$SCRIPT_PATH" &               # Skripti background-da işə sal
+    echo $! > "$PID_FILE"          # PID faylına yaz
+    echo "manage_my_process started"
+}
+
+stop() {
+    if [ -f "$PID_FILE" ]; then
+        kill $(cat "$PID_FILE")     # Prosesə SIGTERM göndər
+        rm -f "$PID_FILE"           # PID faylını sil
+    fi
+    echo "manage_my_process stopped"
+}
+
+restart() {
+    stop
+    start
+    echo "manage_my_process restarted"
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage: manage_my_process {start|stop|restart}"
+        exit 1
+        ;;
+esac
