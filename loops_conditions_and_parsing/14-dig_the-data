@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
-# Display requests by IP and HTTP status code sorted by occurrences
+# Script to group visitors by IP and HTTP status code and sort by occurrence
 
-#!/bin/bash
-
-file="apache-access.log"
-
-# Basic check: each line must have at least 3 fields
-if ! awk '{if(NF<3) exit 1}' "$file"; then
-    echo "wrong format log file"
-    exit 0
-fi
-
-# Continue normal processing here...
+awk 'NF>=9 {print $1, $9}' apache-access.log | sort | uniq -c | sort -rn
 
