@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Sonsuz döngü ilə "To infinity and beyond" yazır və SIGTERM siqnalına cavab verir
+
+# SIGTERM siqnalı üçün handler
+trap 'echo "I am invincible!!!"' SIGTERM
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
