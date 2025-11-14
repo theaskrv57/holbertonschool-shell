@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Bu skript bütün istifadəçilərin işləyən proseslərini, hiyerarxiya şəklində göstərir
+
+# Bütün prosesləri ağac formatında göstər
+ps -ef --forest
