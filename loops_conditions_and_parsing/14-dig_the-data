@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 # Display requests by IP and HTTP status code sorted by occurrences
 
-awk 'NF>=9 {print $1, $9}' apache-access.log | sort | uniq -c | sort -nr | awk '{print $1, $2, $3}'
+#!/usr/bin/env bash
+# Script to group visitors by IP and HTTP status code and sort by occurrence
+
+awk 'NF>=9 { print $1, $9 }' apache-access.log | sort | uniq -c | sort -rn
 
