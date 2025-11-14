@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# file: 14-dig_the-data
-awk '{print $1, $9}' apache-access.log \
-| sort \
-| uniq -c \
-| sort -nr \
-| awk '{print $1, $2, $3}'
+# Display requests by IP and HTTP status code sorted by occurrences
+
+awk 'NF>=9 {print $1, $9}' apache-access.log | sort | uniq -c | sort -nr | awk '{print $1, $2, $3}'
 
