@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
-# Script that displays the number of requests by IP and HTTP status code
+# file: 14-dig_the-data
+awk '{print $1, $9}' apache-access.log \
+| sort \
+| uniq -c \
+| sort -nr \
+| awk '{print $1, $2, $3}'
 
-awk '{
-    if (NF >= 9) {
-        count[$1,$9]++
-    }
-} END {
-    for (key in count) {
-        split(key, arr, SUBSEP)
-        print count[key], arr[1], arr[2]
-    }
-}' apache-access.log | sort -nr
