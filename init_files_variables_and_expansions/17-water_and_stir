@@ -1,0 +1,34 @@
+#!/bin/bash
+
+water="waewtreat"
+stir="stinirtrt."
+bestchol="bestchol"
+
+# WATER → decimal
+dec1=$(echo "$WATER" | tr "$water" "012345678" | awk '{print strtonum("0"$0)}')
+
+# STIR → decimal
+dec2=$(echo "$STIR" | tr "$stir"  "0123456789" | awk '{print strtonum("0"$0)}')
+
+# Add
+sum=$(expr $dec1 + $dec2)
+
+# Convert back to base bestchol
+result=""
+len=${#bestchol}
+
+while [ $sum -gt 0 ]
+do
+    rem=$(expr $sum % $len)
+    result="${bestchol:$rem:1}$result"
+    sum=$(expr $sum / $len)
+done
+
+echo "$result"
+🔥 Nəticə (təhlükəsiz test olunmuş)
+bash
+Copy code
+export WATER="ewwatratewa"
+export STIR="ti.itirtrtr"
+
+./17-water_and_stir
