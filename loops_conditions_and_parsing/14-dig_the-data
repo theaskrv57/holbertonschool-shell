@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# Script that counts occurrences of IPs and HTTP codes in apache log
+# Count occurrences of IPs and HTTP codes in apache-access.log
 
-awk '$1 && $9 ~ /^[0-9]+$/ {print $1, $9}' apache-access.log | sort | uniq -c | sort -nr | awk '{print $1, $2, $3}'
+awk '$1 && $9 ~ /^[0-9]+$/ {print $1, $9}' apache-access.log \
+| sort \
+| uniq -c \
+| sort -nr \
+| awk '{print $1, $2, $3}'
 
