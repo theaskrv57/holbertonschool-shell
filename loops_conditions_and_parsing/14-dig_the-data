@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Displays the number of occurrences of each IP and HTTP code in apache-acc
-awk '{ match($0, /"[^"]*"/); req=$0; gsub(/.*"[^"]*" /,"",req); split(req, a, " "); count[$1" "a[1]]++ } END {for (i in count) print count[i], i}' apache-access.log | sort -rn
+# Script that counts occurrences of IPs and HTTP codes in apache log
 
+awk '$1 && $9 ~ /^[0-9]+$/ {print $1, $9}' apache-access.log | sort | uniq -c | sort -nr | awk '{print $1, $2, $3}'
 
