@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# Script to group visitors by IP and HTTP status code and sort by occurrence
-awk '{print $1, $9}' apache-access.log \
-| sort \
-| uniq -c \
-| sort -nr \
-| awk '{print $1, $2, $3}'
+# Script that counts occurrences of IPs and HTTP codes in apache log
 
+awk '$1 && $9 ~ /^[0-9]+$/ {count[$1" "$9]++} END {for (k in count) print count[k], k}' apache-access.log | sort -nr
