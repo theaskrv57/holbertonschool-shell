@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 #salam
 pkill -9 -f 4-to_infinity_and_beyond
-sleep 1
-
