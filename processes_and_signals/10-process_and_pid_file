@@ -1,37 +1,17 @@
 #!/usr/bin/env bash
-# Creates a PID file in /tmp and handles signals while printing messages
+#10-process_and_pid_file
 
-PID_FILE="/tmp/myscript.pid"
+pid_file="/var/run/myscript.pid"
 
-# Write PID to file
-echo $$ > "$PID_FILE"
+# PID fayli
+echo $$ > "$pid_file"
 
-# Function to handle SIGINT (Ctrl+C)
-handle_sigint() {
-    echo "Y U no love me?!"
-}
+trap 'echo "I hate the kill command"; rm -f "$pid_file"; exit 0' SIGTERM
+trap 'echo "Y U no love me?!"' SIGINT
+trap 'rm -f "$pid_file"; exit 0' SIGQUIT
 
-# Function to handle SIGTERM
-handle_sigterm() {
-    echo "I hate the kill command"
-    rm -f "$PID_FILE"
-    exit 0
-}
-
-# Function to handle SIGQUIT
-handle_sigquit() {
-    rm -f "$PID_FILE"
-    exit 0
-}
-
-# Set traps for signals
-trap handle_sigint SIGINT
-trap handle_sigterm SIGTERM
-trap handle_sigquit SIGQUIT
-
-# Infinite loop printing message
+#loop
 while true; do
     echo "To infinity and beyond"
     sleep 2
 done
-
