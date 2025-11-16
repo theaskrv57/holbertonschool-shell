@@ -3,6 +3,11 @@
 
 PID_FILE="/var/run/myscript.pid"
 
+# If cannot write to /var/run, fallback to /tmp
+if ! touch "$PID_FILE" 2>/dev/null; then
+    PID_FILE="/tmp/myscript.pid"
+fi
+
 # Write PID to file
 echo $$ > "$PID_FILE"
 
@@ -34,3 +39,4 @@ while true; do
     echo "To infinity and beyond"
     sleep 2
 done
+
