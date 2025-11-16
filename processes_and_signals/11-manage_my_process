@@ -1,33 +1,25 @@
 #!/usr/bin/env bash
-# Init script to manage manage_my_process process: start, stop, restart
+# Manage my process
 
-PID_FILE="/tmp/my_process.pid"
-SCRIPT_PATH="$(pwd)/manage_my_process"
+PID_FILE="/var/run/my_process.pid"
+PROC="./my_process"
 
 start() {
-    "$SCRIPT_PATH" &
+    $PROC &
     echo $! > "$PID_FILE"
-    echo "manage_my_process started"
 }
 
 stop() {
     if [ -f "$PID_FILE" ]; then
-        kill "$(cat "$PID_FILE")" 2>/dev/null
-      sudo  rm -f "$PID_FILE"
+        kill "$(cat $PID_FILE)" 2>/dev/null
+        rm -f "$PID_FILE"
     fi
-    echo "manage_my_process stopped"
 }
 
 restart() {
-    if [ -f "$PID_FILE" ]; then
-        kill "$(cat "$PID_FILE")" 2>/dev/null
-        rm -f "$PID_FILE"
-    fi
-
-    "$SCRIPT_PATH" &
+    [ -f "$PID_FILE" ] && kill "$(cat $PID_FILE)" 2>/dev/null && rm -f "$PID_FILE"
+    $PROC &
     echo $! > "$PID_FILE"
-
-    echo "manage_my_process restarted"
 }
 
 case "$1" in
