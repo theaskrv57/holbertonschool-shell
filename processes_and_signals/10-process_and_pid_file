@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #10-process_and_pid_file
 
-pid_file="/var/run/myscript.pid"
+pid_file="/tmp/var/run/myscript.pid"
 
 # PID fayli
 echo $$ > "$pid_file"
