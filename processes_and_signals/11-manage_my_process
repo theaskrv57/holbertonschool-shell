@@ -13,7 +13,7 @@ start() {
 stop() {
     if [ -f "$PID_FILE" ]; then
         kill "$(cat "$PID_FILE")" 2>/dev/null
-        rm -f "$PID_FILE"
+      sudo  rm -f "$PID_FILE"
     fi
     echo "manage_my_process stopped"
 }
