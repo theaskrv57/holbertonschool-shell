@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Init script to manage manage_my_process
+# Init script to manage manage_my_process process: start, stop, restart
 
 PID_FILE="/var/run/my_process.pid"
 SCRIPT_PATH="$(pwd)/manage_my_process"
@@ -19,8 +19,17 @@ stop() {
 }
 
 restart() {
-    stop
-    start
+    # Stop silently
+    if [ -f "$PID_FILE" ]; then
+        kill "$(cat "$PID_FILE")" 2>/dev/null
+        rm -f "$PID_FILE"
+    fi
+
+    # Start silently
+    "$SCRIPT_PATH" &
+    echo $! > "$PID_FILE"
+
+    # Only restart message
     echo "manage_my_process restarted"
 }
 
