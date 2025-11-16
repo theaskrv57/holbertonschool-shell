@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Creates a PID file and handles signals while printing messages
 
-PID_FILE="/var/run/myscript.pid"
+PID_FILE="/tmp/myscript.pid"
 
 # If /var/run is not writable, fallback to /tmp
 if ! touch "$PID_FILE" 2>/dev/null; then
-    PID_FILE="/var/run/myscript.pid"
+    PID_FILE="/tmp/myscript.pid"
 fi
 
 # Write PID to file
