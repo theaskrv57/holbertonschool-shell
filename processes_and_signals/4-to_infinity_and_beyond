@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Bu skript "To infinity and beyond" mesajını dayanmadan, 2 saniyə fasilə ilə göstərir
-
-while true; do
+#Show your Bash PID made easy
+while true
+do
     echo "To infinity and beyond"
     sleep 2
 done
