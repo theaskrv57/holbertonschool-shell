@@ -1,24 +1,36 @@
 #!/usr/bin/env bash
-# Skript PID faylı yaradır və SIGTERM/SIGQUIT siqnallarına cavab verir
+# Creates a PID file and handles signals while printing messages
 
 PID_FILE="/var/run/myscript.pid"
 
-# Skriptin PID-ni fayla yaz
+# Write PID to file
 echo $$ > "$PID_FILE"
 
-# SIGTERM və SIGQUIT üçün handler
-term_handler() {
+# Function to handle SIGINT (Ctrl+C)
+handle_sigint() {
+    echo "Y U no love me?!"
+}
+
+# Function to handle SIGTERM
+handle_sigterm() {
     echo "I hate the kill command"
     rm -f "$PID_FILE"
     exit 0
 }
 
-# Trap siqnalları
-trap term_handler SIGTERM SIGQUIT
+# Function to handle SIGQUIT
+handle_sigquit() {
+    rm -f "$PID_FILE"
+    exit 0
+}
 
-# Sonsuz döngü ilə mesaj yaz
+# Set traps for signals
+trap handle_sigint SIGINT
+trap handle_sigterm SIGTERM
+trap handle_sigquit SIGQUIT
+
+# Infinite loop printing message
 while true; do
     echo "To infinity and beyond"
     sleep 2
 done
-
