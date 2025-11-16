@@ -22,7 +22,7 @@ restart() {
     # Stop silently
     if [ -f "$PID_FILE" ]; then
         kill "$(cat "$PID_FILE")" 2>/dev/null
-        rm -f "$PID_FILE")
+        rm -f "$PID_FILE"
     fi
 
     # Start silently
@@ -32,6 +32,7 @@ restart() {
     # Only restart message
     echo "manage_my_process restarted"
 }
+
 
 case "$1" in
     start)
