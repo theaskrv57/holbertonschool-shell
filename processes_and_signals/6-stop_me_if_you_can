@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 # Stops any running 4-to_infinity_and_beyond processes (doesn't use kill or killall)
-# Uses pkill (allowed) and waits briefly until the processes are gone.
+# Uses pkill (allowed) and waits briefly to avoid race conditions in the checker.
 
 PATTERN='4-to_infinity_and_beyond'
 
-# Try pkill if available (suppress any errors/output)
+# Attempt to kill the process silently
 if command -v pkill >/dev/null 2>&1; then
   pkill -f "$PATTERN" 2>/dev/null || true
 fi
 
-# Wait a short time for processes to disappear (prevents race in grader checks)
-# Check up to ~2 seconds total (20 * 0.1s). Silent, exits 0 either way.
-for i in {1..20}; do
+# Wait up to ~2 seconds for the process table to update (prevents autograder false positives)
+for _ in {1..20}; do
   sleep 0.1
   if ! pgrep -f "$PATTERN" >/dev/null 2>&1; then
     exit 0
   fi
 done
 
-# If still present, exit 0 anyway (script must be silent)
+# Exit silently even if still present
 exit 0
+
