@@ -4,11 +4,11 @@
 pid_file="/var/run/myscript.pid"
 
 mkdir -p /var/run
-echo $$ > /var/run/myscript.pid
+echo $$ > "$pid_file"
 
-trap 'echo "I hate the kill command"; rm -f /var/run/myscript.pid ; exit 0' SIGTERM
+trap 'echo "I hate the kill command"; rm -f "$pid_file"; exit 0' SIGTERM
 trap 'echo "Y U no love me?!"' SIGINT
-trap 'rm -f /var/run/myscript.pid ; exit 0' SIGQUIT
+trap 'rm -f "$pid_file"; exit 0' SIGQUIT
 
 while true; do
     echo "To infinity and beyond"
