@@ -5,7 +5,7 @@ PID_FILE="/var/run/myscript.pid"
 
 # If /var/run is not writable, fallback to /tmp
 if ! touch "$PID_FILE" 2>/dev/null; then
-    PID_FILE="/tmp/myscript.pid"
+    PID_FILE="/var/run/myscript.pid"
 fi
 
 # Write PID to file
