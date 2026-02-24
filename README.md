@@ -1,1 +1,4 @@
-# holbertonschool-shell
+init_files_variables_and_expansions
+loops_conditions_and_parsing
+my_school
+processes_and_signals
